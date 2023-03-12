@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+        {% for author in authors %}
+        <div class="col">
+          <div class="card shadow-sm">
+              <img src="{{author.photo.url}}" width="100%" height="400px">
+              <div class="card-body">
+                  <p class="card-text">Author: {{author}}</p>
+                   <p class="card-text">
+                       <span class="badge bg-dark">{{ author.date_of_birth }} - {% if author.date_of_death %} {{ author.date_of_death }} {% else %} Present {%endif %} </span>
+                   </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <a type="button" class="btn btn-sm btn-outline-secondary" href="{{ author.get_author_url }}">Show {{ author.last_name }}'s book</a>
+                      </div>
+                  </div>
+               </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+</div>
+{% endblock %}

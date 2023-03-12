@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="form-signin text-center container">
+
+  {% if user_form.errors %}
+
+    <div class="alert alert-danger">
+      <strong>Error!</strong> {{form.errors}}
+    </div>
+
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    <h1 class="h3 mb-3 fw-normal">Create new account</h1>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="floatingInput1" name="username">
+      <label for="floatingInput1">Username</label>
+    </div>
+
+      <div class="form-floating">
+      <input type="email" class="form-control" id="floatingInput2" placeholder="Email" name="email">
+      <label for="floatingInput2">Email</label>
+    </div>
+
+      <div class="form-floating">
+      <input type="text" class="form-control" id="floatingInput4" placeholder="Your Surname" name="last_name">
+      <label for="floatingInput4">Your surname</label>
+    </div>
+
+      <div class="form-floating">
+      <input type="text" class="form-control" id="floatingInput3" placeholder="Your name" name="first_name">
+      <label for="floatingInput3">Name</label>
+    </div>
+
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword2" placeholder="Repeat your password" name="password2">
+      <label for="floatingPassword2">Repeat your password</label>
+    </div>
+
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Create new account</button>
+  </form>
+</main>
+{% endblock %}

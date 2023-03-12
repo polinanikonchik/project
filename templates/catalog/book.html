@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="container mt-3">
+        <div class="card">
+            <svg class="bd-placeholder-img card-img-top" width="30%" height="500px" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: Эскиз" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{book.p}}</text></svg>
+            <div class="card-body">
+              <p class="card-text">{{book.title}}</p>
+              <p class="card-text">{{book.author}}</p>
+              <p class="card-text">{{book.display_genre}}</p>
+            </div>
+            <div class="card-body">
+              <p class="card-text">{{book.summary}}</p>
+            </div>
+            <div class="card-footer">
+                <a type="button" class="btn btn-primapy">Add to card</a>
+                <span class="badge bg-success">{{book.price}}</span>
+            </div>
+        </div>
+    </div>
+{% endblock %}

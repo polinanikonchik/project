@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-3">
+        {% for genre in genres %}
+        <div class="col">
+          <div class="card shadow-sm">
+              <img src="{{genre.image.url}}" width="100%" height="400px">
+              <div class="card-body">
+                  <p class="card-text">{{genre}}</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                      <div class="btn-group">
+                        <a type="button" class="btn btn-sm btn-outline-secondary" href="{{ genre.get_genre_url }}">Show {{ genre }}'s book</a>
+                      </div>
+                  </div>
+               </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+</div>
+{% endblock %}

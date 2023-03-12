@@ -3,8 +3,71 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <script type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
+    <script type='text/javascript' src='https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js'></script>
 </head>
 <body>
+    <header class="p-3 bg-dark text-white">
+    <div class="container">
+      <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+        <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+          <li><a href="{% url 'catalog-index' %}" class="nav-link px-2 text-white">Главная</a></li>
+          <li><a href="{% url 'catalog-authors'%}" class="nav-link px-2 text-white">Authors</a></li>
+          <li><a href="{% url 'catalog-genres' %}" class="nav-link px-2 text-white">Genre</a></li>
+        </ul>
+        <form class="d-flex px-2" action="{% url 'catalog-search' %}" method="post">
+            {% csrf_token %}
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="content">
+            <button class="btn btn-success" type="submit">Search</button>
+        </form>
+        {% if user.is_authenticated %}
+        <div hidden >
+            <div data-name="popover-content">
+                <table class="table table-hover">
+                      <tbody>
+                      {% for book in cart.products.all %}
+                        <tr>
+                          <td style="vertial-aligh: middle">{{ book.title }}</td>
+                          <td style="vertial-aligh: middle">{{ book.price }}</td>
+                          <td><img src="{{book.image.url}}" width="60px" height="80px" ></td>
+                        </tr>
+                      {% endfor %}
+                      </tbody>
+                </table>
+                 <a type="button" class="btn btn-outline-success me-2" href="#" style="display: flex; justify-content: center;">Buy</a>
+                 <p class="text-dark"> Total price:{{ cart.get_total_price }}</p>
+            </div>
+        </div>
+        <a type="button"
+           class="btn btn-outline-light me-2"
+           data-bs-toggle="popover"
+           data-bs-placement="bottom"
+           id ='cart'
+        >Cart <span class="badge bg-dark">{{ cart.get_total_quantity }}</span></a>
+        {% endif %}
+        <div class="text-end">
+            {% if user.is_authenticated %}
+               <span class="px-2 text-white">Hello, {{user.username}}!</span><a type="button" class="btn btn-outline-light me-2" href="{% url 'logout' %}">Logout</a>
+            {% else %}
+               <a type="button" class="btn btn-outline-light me-2" href="{% url 'login' %}">Sing in</a>
+               <a type="button" class="btn btn-outline-warning" href="{% url 'accounts-registration' %}">Sing Up</a>
+            {% endif %}
+        </div>
+      </div>
+    </div>
+  </header>
+    {% block content %}{% endblock %}
+<script type='text/javascript'>
+    $(document).ready(function() {
 
+    var options = {
+        html: true,
+        content: $('[data-name="popover-content"]')
+       }
+       var exampleEl = document.getElementById('cart')
+       var popover = new bootstrap.Popover(exampleEl, options)
+       })
+</script>
 </body>
 </html>

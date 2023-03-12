@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="form-signin text-center container">
+
+  {% if form.errors %}
+
+    <div class="alert alert-danger alert-dismissible">
+      <strong>Error!</strong> Incorrent username or password. Please, try again.
+    </div>
+
+  {% endif %}
+
+  <form method="post">
+    {% csrf_token %}
+    <h1 class="h3 mb-3 fw-normal">Пожалуйста, войдите</h1>
+
+    <div class="form-floating">
+      <input type="text" class="form-control" id="floatingInput" name="username">
+      <label for="floatingInput">Username</label>
+    </div>
+    <div class="form-floating">
+      <input type="password" class="form-control" id="floatingPassword" placeholder="Password" name="password">
+      <label for="floatingPassword">Password</label>
+    </div>
+
+    <div class="checkbox mb-3">
+      <label>
+        <a href="{% url 'password_reset' %}"> Forgot password?</a>
+      </label>
+    </div>
+    <button class="w-100 btn btn-lg btn-primary" type="submit">Войти</button>
+    <p class="mt-5 mb-3 text-muted"></p>
+  </form>
+</main>
+{% endblock %}
